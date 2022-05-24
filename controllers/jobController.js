@@ -1,10 +1,12 @@
 const Job = require("../models/jobs");
 
 // import this in jobs.js
-exports.getjobs = (req, res, next) => {
+exports.getjobs = async (req, res, next) => {
+    var jobs = await Job.find();
     res.json({
         success: true, 
-        noteThat: "here you will get info",
+        results: jobs.length,
+        data: jobs
  });
 };
 
