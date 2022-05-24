@@ -1,7 +1,7 @@
 const User = require('../models/users');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const ErrorHandler = require('../utils/errorHandler');
-// const sendToken = require('../utils/jwtToken');
+const sendToken = require('../utils/jwtToken');
 // const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
  
@@ -15,13 +15,13 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
         password,
         role
     });
-    const token = user.getJwtToken();
-    res.status(200).json({
-        success: true,
-        message: "Succesfully registered user",
-        token : token
-    })
-    // sendToken(user, 200, res);
+    // const token = user.getJwtToken();
+    // res.status(200).json({
+    //     success: true,
+    //     message: "Succesfully registered user",
+    //     token : token
+    // })
+    sendToken(user, 200, res);
 });
 
 // Login user  =>  /api/v1/login
@@ -47,12 +47,12 @@ exports.loginUser = async (req, res, next) => {
         return next(new ErrorHandler('Invalid Password', 401));
     }
 
-    //sendToken(user, 200, res);
-    const token = user.getJwtToken();
-    res.status(200).json({
-        success: false,
-        token
-    })
+    sendToken(user, 200, res);
+    // const token = user.getJwtToken();
+    // res.status(200).json({
+    //     success: false,
+    //     token
+    // })
 };
 
 // // Forgot Password  =>  /api/v1/password/forgot

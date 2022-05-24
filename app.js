@@ -1,10 +1,14 @@
 var express = require("express");
+const cookieParser = require('cookie-parser');
 let app = express();
 
 
 const dotenv = require('dotenv');
 //Setting up config.env file variables
 dotenv.config({path:"./config/config.env"})
+
+// Set cookie parser
+app.use(cookieParser());
 
 //Connecting to database
 const connectDatabase = require("./config/database");

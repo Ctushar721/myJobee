@@ -9,9 +9,12 @@ const {getjobs, newJob} = require("../controllers/jobController.js");
 // })
 //The express.Router() function is used to create a new router object. 
 //This function is used when you want to create a new router object in your program to handle requests. 
+
+const { isAuthenticatedUser } = require('../middlewares/auth');
+
 router.route('/jobs').get(getjobs);
 
-router.route('/job/new').post(newJob);
+router.route('/job/new').post(isAuthenticatedUser,newJob);
 
 module.exports = router;
 // res.json() function sends a JSON response.

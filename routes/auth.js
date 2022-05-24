@@ -6,7 +6,7 @@ const {
     loginUser
  } = require('../controllers/authController');
 
-//  const { isAuthenticatedUser } = require('../middlewares/auth');
+const { isAuthenticatedUser } = require('../middlewares/auth');
 
 router.route('/register').post(registerUser);
 router.route('/login').post(loginUser);
